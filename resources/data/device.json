@@ -1,0 +1,23 @@
+{
+  "device_key": "5254002342DC",
+  "facts": {
+    "aos_hcl_model": "Cisco_NXOSv",
+    "aos_server": "172.20.194.3",
+    "aos_version": "jp-evpn-sz-vrf.46",
+    "hw_model": "NX-OSv",
+    "hw_version": "0.0",
+    "mgmt_ifname": "mgmt0",
+    "mgmt_ipaddr": "172.20.194.22",
+    "mgmt_macaddr": "52:54:00:23:42:DC",
+    "os_arch": "x86_64",
+    "os_family": "NXOS",
+    "os_version": "7.0(3)I7(1)",
+    "os_version_info": {
+      "build": "(3)I7(1)",
+      "major": "7",
+      "minor": "0"
+    },
+    "serial_number": "5254002342DC",
+    "vendor": "Cisco"
+  }
+}
