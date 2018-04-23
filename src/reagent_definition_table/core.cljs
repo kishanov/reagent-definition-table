@@ -34,22 +34,35 @@
                       :password "admin"}})
 
 
+(defn as-list [item-formatter coll]
+  (->> coll
+       (map (fn [e] [:div.item (item-formatter e)]))
+       (into [:div.ui.items])))
+
+
+(defn as-code [value]
+  [:pre
+   [:code value]])
+
 
 
 (defn app-root []
   [:div.ui.container
-   [:h1.ui.dividing.header " Definition Table "]
+   [:h1.ui.dividing.header "Definition Table"]
 
    [:div.ui.grid
     [:div.two.column.row
      [:div.column
       [dt/definition-table
        provider-payload
-       (list [[:provider_name] " Name " identity]
+       (list [[:provider_name] "Name" identity]
              [[:vendor] "Vendor" identity]
-             [[:port] " Port " identity]
-             [[:auth_mode] " Auth Mode " (fn [v] [:div.ui.label v])]
-             [[:active] " Active? " (fn [v] (if v " yes " " no "))])]]]]
+             [[:port] "Port" identity]
+             [[:auth_mode] "Auth Mode" (fn [v] [:div.ui.label v])]
+             [[:active] "Active?" (fn [v] (if v "yes" "no"))]
+             [[:hostname_fqdn_ip] "Hostname FQDNs" (partial as-list as-code)]
+
+             )]]]]
 
    #_[:h3 " Edit this and watch it change! "]])
 
