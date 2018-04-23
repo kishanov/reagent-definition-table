@@ -15,8 +15,7 @@
            :os_version      "7.0(3)I7(1)"
            :os_version_info {:build "(3)I7(1)"
                              :major 7
-                             :minor 0
-                             }
+                             :minor 0}
            :serial_number   "5254002342DC"
            :vendor          "Cisco"}})
 
@@ -56,7 +55,7 @@
   [:div.ui.container
    [:h1.ui.dividing.header "Definition Table"]
 
-   [:div.ui.grid
+   [:div.ui.internally.celled.grid
     [:div.two.column.row
      [:div.column
       [dt/definition-table
@@ -69,7 +68,27 @@
              [[:hostname_fqdn_ip] "Hostname FQDNs" (partial as-list as-code)])
        {:ribbon-label?          true
         :left-column-css-class  "four wide"
-        :right-column-css-class "twelve wide"}]]]]
+        :right-column-css-class "twelve wide"}]]]
+
+    [:div.two.column.row
+     [:div.column
+      [dt/definition-sections
+       device-payload
+       (list ["HW Info"
+              (list [[:facts :vendor] "Vendor" identity]
+                    [[:facts :serial_number] "S/N" identity]
+                    [[:facts :hw_model] "Model" identity]
+                    [[:facts :hw_version] "Version" identity])]
+
+             ["Connectivity"
+              (list [[:facts :mgmt_ifname] "Interface Name" identity]
+                    [[:facts :mgmt_ipaddr] "IP Addrress" identity]
+                    [[:facts :mgmt_macaddr] "Mac Address" identity])]
+
+             ["OS Info"
+              (list [[:facts :os_arch] "Architecture" identity]
+                    [[:facts :os_family] "Family" identity]
+                    [[:facts :os_version] "Version" identity])])]]]]
 
    #_[:h3 " Edit this and watch it change! "]])
 
