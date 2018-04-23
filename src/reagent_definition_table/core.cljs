@@ -1,6 +1,7 @@
 (ns reagent-definition-table.core
   (:require [reagent.core :as reagent :refer [atom]]
-            [def-table.core :as dt]))
+            [def-table.core :as dt]
+            [cljs.pprint :as pp]))
 
 
 (def device-payload
@@ -50,12 +51,21 @@
    value])
 
 
+(defn inspect [data & [pprint?]]
+  [:pre
+   [:code
+    (if pprint?
+      (with-out-str (pp/pprint data))
+      (.stringify js/JSON (clj->js data) nil 2))]])
+
 
 (defn app-root []
   [:div.ui.container
-   [:h1.ui.dividing.header "Definition Table"]
-
    [:div.ui.internally.celled.grid
+    [:div.one.column.row
+     [:div.column
+      [:h2 "Definition Table"]]]
+
     [:div.two.column.row
      [:div.column
       [dt/definition-table
@@ -68,7 +78,14 @@
              [[:hostname_fqdn_ip] "Hostname FQDNs" (partial as-list as-code)])
        {:ribbon-label?          true
         :left-column-css-class  "four wide"
-        :right-column-css-class "twelve wide"}]]]
+        :right-column-css-class "twelve wide"}]]
+
+     [:div.column
+      [inspect provider-payload]]]
+
+    [:div.one.column.row
+     [:div.column
+      [:h2 "Definition Sections"]]]
 
     [:div.two.column.row
      [:div.column
@@ -88,9 +105,10 @@
              ["OS Info"
               (list [[:facts :os_arch] "Architecture" identity]
                     [[:facts :os_family] "Family" identity]
-                    [[:facts :os_version] "Version" identity])])]]]]
+                    [[:facts :os_version] "Version" identity])])]]
 
-   #_[:h3 " Edit this and watch it change! "]])
+     [:div.column
+      [inspect device-payload]]]]])
 
 (reagent/render-component [app-root]
                           (. js/document (getElementById "app")))
