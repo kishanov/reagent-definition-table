@@ -45,6 +45,12 @@
    [:code value]])
 
 
+(defn as-label [css-classes value]
+  [:div.ui.label
+   {:class css-classes}
+   value])
+
+
 
 (defn app-root []
   [:div.ui.container
@@ -56,13 +62,14 @@
       [dt/definition-table
        provider-payload
        (list [[:provider_name] "Name" identity]
-             [[:vendor] "Vendor" identity]
              [[:port] "Port" identity]
-             [[:auth_mode] "Auth Mode" (fn [v] [:div.ui.label v])]
+             [[:vendor] "Vendor" (partial as-label "big default")]
+             [[:auth_mode] "Auth Mode" (partial as-label "teal")]
              [[:active] "Active?" (fn [v] (if v "yes" "no"))]
-             [[:hostname_fqdn_ip] "Hostname FQDNs" (partial as-list as-code)]
-
-             )]]]]
+             [[:hostname_fqdn_ip] "Hostname FQDNs" (partial as-list as-code)])
+       {:ribbon-label?          true
+        :left-column-css-class  "four wide"
+        :right-column-css-class "twelve wide"}]]]]
 
    #_[:h3 " Edit this and watch it change! "]])
 
