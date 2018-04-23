@@ -13,7 +13,9 @@
 (defn definition-table [obj rows-def & [options]]
   {:pre [(if (s/valid? ::rows-def rows-def)
            true
-           (js/console.error (s/explain-str ::rows-def rows-def)))]}
+           (do
+             (js/console.error (s/explain-str ::rows-def rows-def))
+             false))]}
 
   [:table.ui.definition.table
    {:class (:table-css-class options)}

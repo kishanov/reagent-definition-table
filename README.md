@@ -2,6 +2,8 @@
 
 Reagent component to render objects as key-value pairs using 2-column table.
 
+This is a sample application for the article about [Building Reagent Components](https://medium.com/@kirill.ishanov/reagent-component-from-scratch-definition-table-5ad1d8825b87)
+
 ## Setup
 
 To get an interactive development environment run:
